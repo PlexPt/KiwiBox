@@ -1,0 +1,13 @@
+.DS_Store
+dist/electron/*
+dist/web/*
+build/*
+!build/icons
+!build/electron-builder.yaml
+node_modules/
+npm-debug.log
+npm-debug.log.*
+*.log
+thumbs.db
+!.gitkeep
+/testcut/
