@@ -2,7 +2,7 @@ import { isWin, isMac, isLinux, isOldMacVersion, isPythonInstalled, isDev } from
 import path from "path"
 import { remote } from "electron"
 
-export function getMediainfo(vpath) {
+export function getMediainfoExe(isShort) {
 
   let bin
   if (isWin) {
@@ -12,7 +12,7 @@ export function getMediainfo(vpath) {
         "../../../lib/win/mediainfo/MediaInfo.exe")
     } else {
       const exePath = remote.app.getPath("exe")
-      bin = path.join(exePath, "lib/win/mediainfo/MediaInfo.exe")
+      bin = path.join(exePath, "../resources/lib/win/mediainfo/MediaInfo.exe")
     }
 
     // bin = ".\\resources\\lib\\win\\mediainfo\\MediaInfo.exe"
@@ -26,7 +26,13 @@ export function getMediainfo(vpath) {
   } else {
 
   }
+  let output = path.join(bin, "../Plugin/Custom/zh.csv")
+
+  let outputCmd = "--Output=\"file://" + output + "\" "
+  if (!isShort) {
+    outputCmd = ""
+  }
 
 
-  return bin + " " + vpath
+  return "\"" + bin + "\" " + outputCmd
 }

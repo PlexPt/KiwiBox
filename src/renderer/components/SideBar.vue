@@ -7,7 +7,7 @@
             <el-menu-item index="/cut">
                 <i class="el-icon-menu"></i>掐头去尾
             </el-menu-item>
-            <el-menu-item index="/cut">
+            <el-menu-item index="/merge">
                 <i class="el-icon-menu"></i>合并
             </el-menu-item>
             <el-menu-item index="/ptgen">

@@ -7,6 +7,7 @@ const routeOptions = [
   { path: "/", component: "Home" },
   { path: "/home", component: "Home" },
   { path: "/cut", component: "cut" },
+  { path: "/merge", component: "Merge" },
   { path: "/about", component: "About" },
   { path: "/ptgen", component: "PTGen" },
   { path: "/m3u8", component: "M3U8" },

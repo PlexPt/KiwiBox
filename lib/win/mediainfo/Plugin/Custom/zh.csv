@@ -1,0 +1,44 @@
+General;"General\r\nFilename.......: %FileName%
+Container......: %Format%
+Duration.......: %PlayTime/String1%
+Size...........: %FileSize/String%
+
+"
+Video;"Video\r\nCodec..........: %Codec/String% %Format_Profile% %BitDepth/String% %MuxingMode%
+Type...........: %ScanType/String%
+Resolution.....: %Width%x%Height%
+Aspect ratio...: %AspectRatio%:1
+Bit rate.......: %BitRate/String%
+Frame rate.....: %FrameRate/String%
+
+"
+Audio;"Audio\r\nFormat.........: %Format_Commercial% %Format_Profile% %MuxingMode%
+Channels.......: %Channel(s)/String%
+Bit rate.......: %BitRate/String%
+Language.......: %Language/String1% %Title%
+
+"
+Text;Subtitles......: %Format% %Language/String1% %Title% %MuxingMode_More%\r\n
+Chapters
+File_Begin
+File_End
+Page_Begin
+Page_Middle
+Page_End
+General_Begin
+General_End
+Video_Begin
+Video_Middle
+Video_End
+Audio_Begin
+Audio_Middle
+Audio_End
+Text_Begin
+Text_Middle
+Text_End
+Chapters_Begin
+Chapters_Middle
+Chapters_End
+
+
+

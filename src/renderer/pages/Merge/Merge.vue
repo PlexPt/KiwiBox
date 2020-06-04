@@ -1,9 +1,27 @@
 <template>
     <div>
-        <h1>M3U8 下载器 (未完成)</h1>
-        <P>m3u8地址
-            <el-input style="width: 80%"></el-input>
-        </P>
+        <h1>视频合并器 (未完成)</h1>
+
+        <el-card shadow="hover">
+            <el-upload
+                    class="upload-demo"
+                    drag
+                    action=""
+                    :on-preview="handlePreview"
+                    :on-remove="handleRemove"
+                    :on-change="handleChange"
+                    :file-list="fileList"
+                    :auto-upload="false"
+                    multiple>
+                <i class="el-icon-upload"></i>
+                <div class="el-upload__text">将文件拖到此处，或<em>点击添加</em></div>
+                <div class="el-upload__tip" slot="tip">只能添加视频文件
+                    <el-button size="mini" type="danger" plain @click="cleanFiles">清空
+                    </el-button>
+                </div>
+            </el-upload>
+        </el-card>
+
         <P>输出目录
             <el-input style="width: 80%"></el-input>
         </P>
@@ -27,7 +45,7 @@
                      v-model="mergeCheck"
         ></el-checkbox>
 
-        <el-checkbox label="合并后删除分片" border
+        <el-checkbox label="合并后删除原视频" border
                      size="mini"
                      :disabled="!mergeCheck"
                      v-model="deleteCheck"
@@ -59,10 +77,11 @@
     data() {
       return {
         thread: 8,
+        fileList: [],
         threads: [1, 2, 4, 8, 12, 16, 32, 64],
         cmdResult: "",
         mergeCheck: true,
-        deleteCheck: true,
+        deleteCheck: false,
         cmdInput: ""
       }
     },

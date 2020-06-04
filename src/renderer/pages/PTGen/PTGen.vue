@@ -57,9 +57,10 @@
                 <p style="margin-top: 0px">自动获取Media Info
                     <el-checkbox v-model="isAutoShot"
                                  label="自动截图传图床"
-                                 style="margin-left: 20px"
+                                 style="margin-left: 20px;margin-right: 5px"
+
                                  border
-                                 size="medium"></el-checkbox>
+                                 size="small"></el-checkbox>
                     <el-popover
                             placement="top-start"
                             title="这是什么"
@@ -70,13 +71,45 @@
                                    size="small"
                                    circle></el-button>
                     </el-popover>
+
+                    <!--                    <el-checkbox v-model="isAutoNfo"-->
+                    <!--                                 label="自动生成NFO"-->
+                    <!--                                 style="margin-left: 20px;margin-right: 5px"-->
+
+                    <!--                                 border-->
+                    <!--                                 size="small"></el-checkbox>-->
+                    <!--                    <el-popover-->
+                    <!--                            placement="top-start"-->
+                    <!--                            title="这是什么"-->
+                    <!--                            width="200"-->
+                    <!--                            trigger="hover"-->
+                    <!--                            content="自动生成NFO文件到视频同级目录。">-->
+                    <!--                        <el-button slot="reference" icon="el-icon-warning"-->
+                    <!--                                   size="small"-->
+                    <!--                                   circle></el-button>-->
+                    <!--                    </el-popover>-->
+                    <el-checkbox v-model="isShortMediaInfo"
+                                 label="简短的MediaInfo"
+                                 style="margin-left: 20px;margin-right: 5px"
+                                 border
+                                 size="small"></el-checkbox>
+                    <el-popover
+                            placement="top-start"
+                            title="这是什么"
+                            width="200"
+                            trigger="hover"
+                            content="使用更简短的MediaInfo模板">
+                        <el-button slot="reference" icon="el-icon-warning"
+                                   size="small"
+                                   circle></el-button>
+                    </el-popover>
+
                 </p>
 
                 <el-upload
                         class="upload-demo"
                         drag
                         action=""
-                        :on-remove="handleRemove"
                         :on-change="handleChange"
                         :file-list="fileList"
                         :auto-upload="false"
@@ -119,7 +152,7 @@
     }
 </style>
 <script>
-  import { getMediainfo } from "../../utils/mediainfo"
+  import { getMediainfoExe } from "../../utils/mediainfo"
 
   const { clipboard } = require("electron")
   export default {
@@ -132,6 +165,8 @@
         filePath: "",
         fileList: [],
         isAutoShot: true,
+        isAutoNfo: false,
+        isShortMediaInfo: false,
         loading: false,
         cmdResult: "",
         cmdInput: "",
@@ -162,14 +197,15 @@
         })
       },
       handleChange(file, fileList) {
-        let path = fileList[0].raw.path
+        let filepath = file.raw.path
 
-        this.filePath = path
+        this.filePath = filepath
 
         let that = this
 
-        let cmd = getMediainfo(path)
+        let cmd = getMediainfoExe(this.isShortMediaInfo) + " \"" + filepath + "\""
 
+        console.log(cmd)
         this.$execCmd(
           // 命令行怎么运行它就怎么写
           cmd,
@@ -180,6 +216,13 @@
           "mediaInfoText",
           result => {
             that.concat()
+          },
+          err => {
+            that.$notify.error({
+              title: "err",
+              message: "出错了\n" + err,
+              type: "success"
+            })
           }
         )
 

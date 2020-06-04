@@ -68,7 +68,7 @@ export function getLibPath() {
         "../../../lib/win/")
     } else {
       const exePath = remote.app.getPath("exe")
-      bin = path.join(exePath, "lib/win/")
+      bin = path.join(exePath, "../resources/lib/win/")
     }
 
   } else if (isMac) {
@@ -77,7 +77,7 @@ export function getLibPath() {
         "../../../lib/mac/")
     } else {
       const exePath = remote.app.getPath("exe")
-      bin = path.join(exePath, "lib/mac/")
+      bin = path.join(exePath, "../resources/lib/mac/")
     }
 
   } else if (isLinux) {
@@ -86,7 +86,7 @@ export function getLibPath() {
         "../../../lib/linux/")
     } else {
       const exePath = remote.app.getPath("exe")
-      bin = path.join(exePath, "lib/linux/")
+      bin = path.join(exePath, "../resources/lib/linux/")
     }
 
   } else {

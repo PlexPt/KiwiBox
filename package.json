@@ -1,6 +1,6 @@
 {
   "name": "KiwiBox",
-  "version": "1.0.2",
+  "version": "1.0.6",
   "author": "plex <pthome@qq.com>",
   "description": "electron + vue + element = KiwiBox desktop app",
   "license": "MIT",
