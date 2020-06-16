@@ -154,6 +154,13 @@
 <script>
   import { getMediainfoExe } from "../../utils/mediainfo"
 
+  // const MediaInfo = require("mediainfo.js")
+  //
+  // let mediainfo
+  // MediaInfo({ format: "text" }, (media) => {
+  //   mediainfo = media
+  //
+  // })
   const { clipboard } = require("electron")
   export default {
 
@@ -189,17 +196,18 @@
     methods: {
       doCopy: function() {
         clipboard.writeText(this.resultText)
-
         this.$notify({
           title: "提示",
           message: "复制成功",
           type: "success"
         })
       },
-      handleChange(file, fileList) {
-        let filepath = file.raw.path
+      handleChange(efile, fileList) {
+        let filepath = efile.raw.path
 
         this.filePath = filepath
+
+        let file = efile.raw
 
         let that = this
 
@@ -226,6 +234,46 @@
           }
         )
 
+
+        // if (file) {
+        //   // let loading = that.$startLoading("获取media info 中...")
+        //   const getSize = () => file.size
+        //   const readChunk = (chunkSize, offset) =>
+        //     new Promise((resolve, reject) => {
+        //       const reader = new FileReader()
+        //       reader.onload = (event) => {
+        //         if (event.target.error) {
+        //           reject(event.target.error)
+        //         }
+        //         resolve(new Uint8Array(event.target.result))
+        //       }
+        //       reader.readAsArrayBuffer(file.slice(offset, offset + chunkSize))
+        //     })
+        //
+        //   // debugger
+        //   mediainfo
+        //     .analyzeData(getSize, readChunk)
+        //     .then((result) => {
+        //       that.mediaInfoText = result
+        //
+        //       // loading.close()
+        //       console.log("解析完成。。。")
+        //       that.concat()
+        //     })
+        //     .catch((error) => {
+        //       that.mediaInfoText = `发生错误:\n${error.stack}`
+        //
+        //       // loading.close()
+        //       console.log("发生错误:\n" + error.stack)
+        //
+        //       that.$notify.error({
+        //         title: "err",
+        //         message: "出错了\n" + error,
+        //         type: "success"
+        //       })
+        //     })
+        // }
+
         console.log("解析完成。。。")
         that.concat()
 
@@ -233,6 +281,7 @@
       concat() {
 
         console.log("concat 开始拼接")
+
         this.resultText = this.genText +
           "\n\n mediaInfo:\n[quote]\n \n" + this.mediaInfoText + "[/quote]\n\n"
           + "截图 待开发 请先手动插入"

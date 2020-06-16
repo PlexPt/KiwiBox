@@ -38,4 +38,4 @@ nsis:
   allowElevation: true
   createDesktopShortcut: true
   createStartMenuShortcut: true
-electronVersion: 3.1.13
+electronVersion: 5.0.13

@@ -15,11 +15,8 @@
   // Load the WebAssembly MediaInfo module if the browser supports it,
   // otherwise load the asmjs module
   var MediaInfoJs = document.createElement("script")
-  if ("WebAssembly" in window) {
-    MediaInfoJs.src = "MediaInfoWasm.js"
-  } else {
+
     MediaInfoJs.src = "MediaInfo.js"
-  }
   document.body.appendChild(MediaInfoJs)
 
   // Continue initialization
